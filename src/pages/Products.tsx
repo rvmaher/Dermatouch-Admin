@@ -141,7 +141,16 @@ export const Products: React.FC = () => {
             setEditingProduct(null);
             setImageFile(null);
             setImagePreview('');
-            reset();
+            reset({
+              title: '',
+              description: '',
+              price: 0,
+              image: '',
+              sku: '',
+              stock: 0,
+              categoryId: '',
+              isActive: true,
+            });
             setIsModalOpen(true);
           }}
           className="btn-primary"
@@ -295,7 +304,7 @@ export const Products: React.FC = () => {
                   {errors.title && <p className="text-red-600 text-sm">{errors.title.message}</p>}
                 </div>
                 
-                <div>
+                <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700">Description</label>
                   <textarea
                     {...register('description')}

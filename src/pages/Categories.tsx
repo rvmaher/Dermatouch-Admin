@@ -139,7 +139,11 @@ export const Categories: React.FC = () => {
             setEditingCategory(null);
             setImageFile(null);
             setImagePreview('');
-            reset();
+            reset({
+              name: '',
+              description: '',
+              image: '',
+            });
             setIsModalOpen(true);
           }}
           className="btn-primary"
