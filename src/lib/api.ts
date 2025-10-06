@@ -11,7 +11,7 @@ import type {
   CreateCategoryRequest,
 } from "../types";
 
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -55,16 +55,22 @@ export const productsApi = {
   getById: (id: number) => api.get<ApiResponse<Product>>(`/products/${id}`),
 
   create: (data: CreateProductRequest | FormData) => {
-    const config = data instanceof FormData ? {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    } : {};
+    const config =
+      data instanceof FormData
+        ? {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        : {};
     return api.post<ApiResponse<Product>>("/products", data, config);
   },
 
   update: (id: number, data: Partial<CreateProductRequest> | FormData) => {
-    const config = data instanceof FormData ? {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    } : {};
+    const config =
+      data instanceof FormData
+        ? {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        : {};
     return api.put<ApiResponse<Product>>(`/products/${id}`, data, config);
   },
 
@@ -77,16 +83,22 @@ export const categoriesApi = {
   getById: (id: number) => api.get<ApiResponse<Category>>(`/categories/${id}`),
 
   create: (data: CreateCategoryRequest | FormData) => {
-    const config = data instanceof FormData ? {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    } : {};
+    const config =
+      data instanceof FormData
+        ? {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        : {};
     return api.post<ApiResponse<Category>>("/categories", data, config);
   },
 
   update: (id: number, data: Partial<CreateCategoryRequest> | FormData) => {
-    const config = data instanceof FormData ? {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    } : {};
+    const config =
+      data instanceof FormData
+        ? {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        : {};
     return api.put<ApiResponse<Category>>(`/categories/${id}`, data, config);
   },
 
@@ -108,12 +120,15 @@ export const usersApi = {
 };
 
 export const dashboardApi = {
-  getStats: () => api.get<ApiResponse<{
-    totalProducts: number;
-    totalOrders: number;
-    totalCategories: number;
-    totalUsers: number;
-    totalRevenue: number;
-    recentOrders: Order[];
-  }>>("/dashboard/stats"),
+  getStats: () =>
+    api.get<
+      ApiResponse<{
+        totalProducts: number;
+        totalOrders: number;
+        totalCategories: number;
+        totalUsers: number;
+        totalRevenue: number;
+        recentOrders: Order[];
+      }>
+    >("/dashboard/stats"),
 };
